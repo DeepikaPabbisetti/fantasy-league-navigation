@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -25,6 +24,12 @@ import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { cn } from "@/lib/utils";
 import Signout from './Signout';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const navigationItems = [
   { title: "Home", url: "/home", icon: Home },
@@ -197,20 +202,35 @@ export function TopNavigation() {
                 </SheetContent>
               </Sheet>
 
-              {/* Profile Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "rounded-full",
-                  theme === "dark" 
-                    ? "hover:bg-gray-800" 
-                    : "hover:bg-gray-100"
-                )}
-                onClick={confirmSignOut}
-              >
-                <CircleUserRound className="h-5 w-5" />
-              </Button>
+              {/* Profile Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={cn(
+                      "rounded-full",
+                      theme === "dark" 
+                        ? "hover:bg-gray-800" 
+                        : "hover:bg-gray-100"
+                    )}
+                  >
+                    <CircleUserRound className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile" className="flex items-center">
+                      <CircleUserRound className="mr-2 h-4 w-4" />
+                      Account
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={confirmSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>

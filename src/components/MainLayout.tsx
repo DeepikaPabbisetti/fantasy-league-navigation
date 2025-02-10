@@ -1,7 +1,7 @@
 
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { TopNavigation } from "./TopNavigation";
+import { Footer } from "./Footer";
 
 export function MainLayout() {
   return (
@@ -10,6 +10,7 @@ export function MainLayout() {
       <main className="flex-1">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }
